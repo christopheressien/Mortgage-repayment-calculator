@@ -86,9 +86,21 @@ document.addEventListener("DOMContentLoaded", () => {
       wrapper(mortgageTermInput)?.classList.add("inputerror");
       signEl(mortgageTermInput)?.classList.add("signserror");
       valid = false;
+    } else if (isNaN(parseFloat(mortgageTermInput.value))) {
+      termError.textContent = "Please enter a valid number";
+      termError.style.display = "block";
+      wrapper(mortgageTermInput)?.classList.add("inputerror");
+      signEl(mortgageTermInput)?.classList.add("signserror");
+      valid = false;
     }
 
     if (interestRateInput.value.trim() === "") {
+      rateError.style.display = "block";
+      wrapper(interestRateInput)?.classList.add("inputerror");
+      signEl(interestRateInput)?.classList.add("signserror");
+      valid = false;
+    } else if (isNaN(parseFloat(interestRateInput.value))) {
+      rateError.textContent = "Please enter a valid number";
       rateError.style.display = "block";
       wrapper(interestRateInput)?.classList.add("inputerror");
       signEl(interestRateInput)?.classList.add("signserror");

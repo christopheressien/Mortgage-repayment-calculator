@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mortgageAmountInput = document.querySelector(".mortgage_Amount");
   const mortgageTermInput = document.querySelector(".mortgage_Term");
   const interestRateInput = document.querySelector(".interest_rate");
+  const clearAll = document.querySelector(".clearAll");
 
   const monthlyRepay = document.querySelector(".monthly_repay");
   const totalPayment = document.querySelector(".total_payment");
@@ -147,10 +148,22 @@ document.addEventListener("DOMContentLoaded", () => {
       })}`;
     }
 
-    // Show results
     cardTwoEmptyContent.style.display = "none";
-    cardTwoCompletedContent.style.display = "block";
+    cardTwoCompletedContent.style.display = "flex";
   }
+  function clearAllbtn() {
+    mortgageAmountInput.value = "";
+    mortgageTermInput.value = "";
+    interestRateInput.value = "";
+    repaymentRadio.checked = false;
+    interestRadio.checked = false;
+
+    monthlyRepay.textContent = "";
+    totalPayment.textContent = "";
+    cardTwoEmptyContent.style.display = "flex";
+    cardTwoCompletedContent.style.display = "none";
+  }
+  clearAll.addEventListener("click", clearAllbtn);
 
   calculateBtn.addEventListener("click", calculate);
 });

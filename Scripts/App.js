@@ -24,23 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const wrapper = (el) => el.closest(".input-feilds");
   const signEl = (el) => wrapper(el)?.querySelector(".signs");
 
-  // -------- RESET STATE ON LOAD --------
-  // Hide all error messages
   [amountError, termError, rateError, typeError].forEach(
     (err) => (err.style.display = "none")
   );
-  // Remove error highlight classes
+
   document
     .querySelectorAll(".input-feilds")
     .forEach((div) => div.classList.remove("inputerror"));
   document
     .querySelectorAll(".signs")
     .forEach((sign) => sign.classList.remove("signserror"));
-  // Always show empty state first
+
   cardTwoEmptyContent.style.display = "flex";
   cardTwoCompletedContent.style.display = "none";
 
-  // -------- LIVE INPUT: REMOVE ERRORS --------
   [mortgageAmountInput, mortgageTermInput, interestRateInput].forEach(
     (input, i) => {
       const spans = [amountError, termError, rateError];
@@ -58,11 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // -------- CALCULATION FUNCTION --------
   function calculate() {
     let valid = true;
 
-    // Mortgage amount validation
     if (mortgageAmountInput.value.trim() === "") {
       amountError.textContent = "This field is required";
       amountError.style.display = "block";
@@ -86,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Term validation
     if (mortgageTermInput.value.trim() === "") {
       termError.style.display = "block";
       wrapper(mortgageTermInput)?.classList.add("inputerror");
@@ -94,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
       valid = false;
     }
 
-    // Rate validation
     if (interestRateInput.value.trim() === "") {
       rateError.style.display = "block";
       wrapper(interestRateInput)?.classList.add("inputerror");
@@ -102,20 +95,17 @@ document.addEventListener("DOMContentLoaded", () => {
       valid = false;
     }
 
-    // Type validation
     if (!repaymentRadio.checked && !interestRadio.checked) {
       typeError.style.display = "block";
       valid = false;
     }
 
-    // Stop if invalid
     if (!valid) {
       cardTwoCompletedContent.style.display = "none";
       cardTwoEmptyContent.style.display = "flex";
       return;
     }
 
-    // Calculation
     const principal = parseFloat(mortgageAmountInput.value);
     const years = parseFloat(mortgageTermInput.value);
     const rate = parseFloat(interestRateInput.value);

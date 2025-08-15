@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const wrapper = (el) => el.closest(".input-feilds");
   const signEl = (el) => wrapper(el)?.querySelector(".signs");
 
-  // Hide all errors initially
   [amountError, termError, rateError, typeError].forEach(
     (err) => (err.style.display = "none")
   );
@@ -38,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
   cardTwoEmptyContent.style.display = "flex";
   cardTwoCompletedContent.style.display = "none";
 
-  // Hide errors on input
   [mortgageAmountInput, mortgageTermInput, interestRateInput].forEach(
     (input, i) => {
       const spans = [amountError, termError, rateError];
@@ -50,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  // Hide type error when radio is selected
   [repaymentRadio, interestRadio].forEach((radio) => {
     radio.addEventListener("change", () => {
       typeError.style.display = "none";
@@ -62,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const amount = parseFloat(mortgageAmountInput.value);
 
-    // Amount validation
     if (mortgageAmountInput.value.trim() === "") {
       amountError.textContent = "This field is required";
       amountError.style.display = "block";
@@ -77,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
       valid = false;
     }
 
-    // Term validation
     if (mortgageTermInput.value.trim() === "") {
       termError.style.display = "block";
       wrapper(mortgageTermInput)?.classList.add("inputerror");
@@ -85,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
       valid = false;
     }
 
-    // Interest rate validation
     if (interestRateInput.value.trim() === "") {
       rateError.style.display = "block";
       wrapper(interestRateInput)?.classList.add("inputerror");
@@ -93,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
       valid = false;
     }
 
-    // Type validation
     if (!repaymentRadio.checked && !interestRadio.checked) {
       typeError.style.display = "block";
       valid = false;

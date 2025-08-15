@@ -73,9 +73,7 @@ border: hsl(61, 70%, 52%) solid 1px;
       .para{
         color: hsl(0, 0%, 80%);
       }
-      /* .card2_empty_content{
-        display: none;
-      } */
+     
        .card2_completed_content{
         display: none;
        }
@@ -126,7 +124,7 @@ border: hsl(61, 70%, 52%) solid 1px;
                transform: scale(0.95);
              }
       
-             /* Checked state - when selected */
+            
              .radio:checked {
                border-color: hwb(61 18% 15%);
                background-color: white;

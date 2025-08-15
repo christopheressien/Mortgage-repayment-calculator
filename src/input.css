@@ -154,11 +154,15 @@ border: hsl(61, 70%, 52%) solid 1px;
              .radio:checked:active {
                border-color: hwb(61 18% 15%);
              }
-              /* .field-error{
-                margin-top: 2px;
-                font-size: 14px;
-                color: hsl(4, 69%, 50%);
-                
-              }
-       */
+                         /* Hide number input arrows in Chrome, Safari, Edge */
+                         input[type="number"]::-webkit-inner-spin-button,
+                         input[type="number"]::-webkit-outer-spin-button {
+                           -webkit-appearance: none;
+                           margin: 0;
+                         }
+            
+                         /* Hide number input arrows in Firefox */
+                         input[type="number"] {
+                           -moz-appearance: textfield;
+                         }
              

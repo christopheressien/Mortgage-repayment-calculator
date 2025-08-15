@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const wrapper = (el) => el.closest(".input-feilds");
   const signEl = (el) => wrapper(el)?.querySelector(".signs");
 
+  // Hide all errors initially
   [amountError, termError, rateError, typeError].forEach(
     (err) => (err.style.display = "none")
   );
-
   document
     .querySelectorAll(".input-feilds")
     .forEach((div) => div.classList.remove("inputerror"));
@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cardTwoEmptyContent.style.display = "flex";
   cardTwoCompletedContent.style.display = "none";
 
+  // Hide errors on input
   [mortgageAmountInput, mortgageTermInput, interestRateInput].forEach(
     (input, i) => {
       const spans = [amountError, termError, rateError];
@@ -49,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
+  // Hide type error when radio is selected
   [repaymentRadio, interestRadio].forEach((radio) => {
     radio.addEventListener("change", () => {
       typeError.style.display = "none";
@@ -58,55 +60,40 @@ document.addEventListener("DOMContentLoaded", () => {
   function calculate() {
     let valid = true;
 
+    const amount = parseFloat(mortgageAmountInput.value);
+
+    // Amount validation
     if (mortgageAmountInput.value.trim() === "") {
       amountError.textContent = "This field is required";
       amountError.style.display = "block";
       wrapper(mortgageAmountInput)?.classList.add("inputerror");
       signEl(mortgageAmountInput)?.classList.add("signserror");
       valid = false;
-    } else {
-      const amount = parseFloat(mortgageAmountInput.value);
-      if (isNaN(amount)) {
-        amountError.textContent = "Please enter a valid number";
-        amountError.style.display = "block";
-        wrapper(mortgageAmountInput)?.classList.add("inputerror");
-        signEl(mortgageAmountInput)?.classList.add("signserror");
-        valid = false;
-      } else if (amount < 1000) {
-        amountError.textContent = "Enter amount from £1000";
-        amountError.style.display = "block";
-        wrapper(mortgageAmountInput)?.classList.add("inputerror");
-        signEl(mortgageAmountInput)?.classList.add("signserror");
-        valid = false;
-      }
+    } else if (amount < 1000) {
+      amountError.textContent = "Enter amount from £1000";
+      amountError.style.display = "block";
+      wrapper(mortgageAmountInput)?.classList.add("inputerror");
+      signEl(mortgageAmountInput)?.classList.add("signserror");
+      valid = false;
     }
 
+    // Term validation
     if (mortgageTermInput.value.trim() === "") {
       termError.style.display = "block";
       wrapper(mortgageTermInput)?.classList.add("inputerror");
       signEl(mortgageTermInput)?.classList.add("signserror");
       valid = false;
-    } else if (isNaN(parseFloat(mortgageTermInput.value))) {
-      termError.textContent = "Please enter a valid number";
-      termError.style.display = "block";
-      wrapper(mortgageTermInput)?.classList.add("inputerror");
-      signEl(mortgageTermInput)?.classList.add("signserror");
-      valid = false;
     }
 
+    // Interest rate validation
     if (interestRateInput.value.trim() === "") {
       rateError.style.display = "block";
       wrapper(interestRateInput)?.classList.add("inputerror");
       signEl(interestRateInput)?.classList.add("signserror");
       valid = false;
-    } else if (isNaN(parseFloat(interestRateInput.value))) {
-      rateError.textContent = "Please enter a valid number";
-      rateError.style.display = "block";
-      wrapper(interestRateInput)?.classList.add("inputerror");
-      signEl(interestRateInput)?.classList.add("signserror");
-      valid = false;
     }
 
+    // Type validation
     if (!repaymentRadio.checked && !interestRadio.checked) {
       typeError.style.display = "block";
       valid = false;
@@ -153,6 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardTwoEmptyContent.style.display = "none";
     cardTwoCompletedContent.style.display = "flex";
   }
+
   function clearAllbtn() {
     mortgageAmountInput.value = "";
     mortgageTermInput.value = "";
@@ -165,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardTwoEmptyContent.style.display = "flex";
     cardTwoCompletedContent.style.display = "none";
   }
-  clearAll.addEventListener("click", clearAllbtn);
 
+  clearAll.addEventListener("click", clearAllbtn);
   calculateBtn.addEventListener("click", calculate);
 });

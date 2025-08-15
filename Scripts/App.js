@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardTwoCompletedContent = document.querySelector(
     ".card2_completed_content"
   );
+  document.querySelectorAll("input.mortgage_Amount").forEach((input) => {
+    input.addEventListener("input", function () {
+      this.value = this.value.replace(/[^0-9.]/g, ""); // allow only numbers & decimal
+    });
+  });
+
   const calculateBtn = document.querySelector(".calculateBtn");
 
   const mortgageAmountInput = document.querySelector(".mortgage_Amount");

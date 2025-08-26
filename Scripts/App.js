@@ -3,11 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardTwoCompletedContent = document.querySelector(
     ".card2_completed_content"
   );
-  document.querySelectorAll("input.mortgage_Amount").forEach((input) => {
-    input.addEventListener("input", function () {
-      this.value = this.value.replace(/[^0-9.]/g, "");
+  document
+    .querySelectorAll(".mortgage_Amount, .mortgage_Term, .interest_rate ")
+    .forEach((input) => {
+      input.addEventListener("input", function () {
+        this.value = this.value.replace(/[^0-9.]/g, "");
+      });
     });
-  });
 
   const calculateBtn = document.querySelector(".calculateBtn");
 
